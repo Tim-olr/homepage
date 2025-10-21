@@ -40,7 +40,7 @@
     </a>
   </nav>
   
-<h2 class="quote">Quote of the day:</h2><h2 class="welcomeH2">Kom op mannen!</h2>
+<h2 class="quote">Quote of the day:</h2><h2 class="welcomeH2" id="dailyQuote">Kom op mannen!</h2>
     
   <div class="wrapper">
     <input id="qr" placeholder="Enter link">
@@ -56,6 +56,30 @@
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script type="module">
+
+    const quotes = [
+      "Kom op mannen!",
+      "Mijn plafond is jullie vloer!",
+      "Wie gooide dat?!?",
+      "Kanoa",
+      "Er is altijd wat te doen...",
+      "Je kan niet altijd 6 gooien"
+    ];
+    
+    // Get day of year to ensure same quote for entire day
+    function getDayOfYear() {
+      const now = new Date();
+      const start = new Date(now.getFullYear(), 0, 0);
+      const diff = now - start;
+      const oneDay = 1000 * 60 * 60 * 24;
+      return Math.floor(diff / oneDay);
+    }
+    
+    // Set quote based on day
+    const dayOfYear = getDayOfYear();
+    const quoteIndex = dayOfYear % quotes.length;
+    document.getElementById('dailyQuote').textContent = quotes[quoteIndex];
+    
     // QR Code functionality
     const btn = document.querySelector("#qrButton");
     const qrImage = document.querySelector("#qrImage");
